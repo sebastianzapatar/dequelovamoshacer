@@ -1,0 +1,25 @@
+{% extends 'base/base.html' %}
+{% block cuerpo %}
+<form method="post">
+    <div class="panel panel-default">
+        <div class="panel heading">
+            Eliminar por perro
+        </div>
+        <div class="panel-body">
+            {% csrf_token %}
+            <div class="alert alert-success">
+                Eliminar {{obj.nombres}} {{obj.apellidos}}
+            </div>
+            <button type="submit" class="btn btn-danger">
+                <span class="fa fa-delete"> 
+                    Eliminar 
+                </span>
+            </button>
+            <a href="{% url 'estudiantes:listar_estudiantes' %}" class="btn btn-success">
+                <span>Arrepentirse de sacar</span>
+            </a>
+        </div>
+    </div>
+</form>
+
+{% endblock cuerpo %}
