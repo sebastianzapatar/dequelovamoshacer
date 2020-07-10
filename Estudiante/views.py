@@ -5,7 +5,7 @@ from django.urls import reverse_lazy
 from Estudiante.models import Estudiante, Profesor
 from .forms import EstudianteForm, ProfesorForm
 from django.contrib.auth.mixins import LoginRequiredMixin
-
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 class ListEstudiantes(LoginRequiredMixin,generic.ListView):#ListView nos hace el select * from Estudiante
     model=Estudiante

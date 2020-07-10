@@ -19,19 +19,26 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
-        
+        {% if perms.estudiante.view_estudiante %}
         <li class="nav-item">
           <a class="nav-link" href="{% url 'estudiantes:listar_estudiantes' %}">Listar estudiantes</a>
         </li>
+        {% endif %}
+        {% if perms.estudiante.create_estudiante %}
         <li class="nav-item">
           <a class="nav-link" href="{% url 'estudiantes:insertar_estudiante' %}">Insertar estudiantes</a>
         </li>
+        {% endif %}
+        {% if perms.estudiante.view_profesor %}
         <li class="nav-item">
           <a class="nav-link" href="{% url 'estudiantes:listar_profesores' %}">Listar Profesores</a>
         </li>
+        {% endif %}
+        {% if perms.estudiante.create_profesor %}
         <li class="nav-item">
             <a class="nav-link" href="{% url 'estudiantes:insertar_profesor'%}">Insertar Profesores</a>
           </li>
+        {% endif %}
           <li class="nav-item">
             <a class="nav-link" href="{% url 'estudiantes:print_all'%}">Imprimir</a>
           </li>
