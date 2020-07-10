@@ -125,3 +125,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS=(os.path.join(BASE_DIR,'static'),)#Recursos del html 
+
+LOGIN_REDIRECT_URL="/"
+LOGOUT_REDIRECT_URL="/login"

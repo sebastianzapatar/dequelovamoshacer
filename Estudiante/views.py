@@ -4,49 +4,59 @@ from django.views import generic
 from django.urls import reverse_lazy
 from Estudiante.models import Estudiante, Profesor
 from .forms import EstudianteForm, ProfesorForm
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 # Create your views here.
-class ListEstudiantes(generic.ListView):#ListView nos hace el select * from Estudiante
+class ListEstudiantes(LoginRequiredMixin,generic.ListView):#ListView nos hace el select * from Estudiante
     model=Estudiante
     template_name="listar_estudiantes.html"
     context_object_name="obj"
-class InsertarEstudiante(generic.CreateView):#CreateView hace el insert into estu..
+    login_url="home:login"
+class InsertarEstudiante(LoginRequiredMixin,generic.CreateView):#CreateView hace el insert into estu..
     model=Estudiante
     template_name="estudiante_form.html"
     form_class=EstudianteForm
     success_url=reverse_lazy("estudiantes:listar_estudiantes")
-class EditarEstudiante(generic.UpdateView):#UpdateView hace el update into estu..
+    login_url="home:login"
+class EditarEstudiante(LoginRequiredMixin,generic.UpdateView):#UpdateView hace el update into estu..
     model=Estudiante
     template_name="estudiante_form.html"
     form_class=EstudianteForm
     success_url=reverse_lazy("estudiantes:listar_estudiantes")
-class BorrarEstudiante(generic.DeleteView):#Delete from Estudiante where...
+    login_url="home:login"
+class BorrarEstudiante(LoginRequiredMixin,generic.DeleteView):#Delete from Estudiante where...
     model=Estudiante
     template_name="borrar_estudiante.html"
     context_object_name="obj"
     success_url=reverse_lazy("estudiantes:listar_estudiantes")
-
+    login_url="home:login"
 
 
 # Las vistas de los profesores
-class InsertarProfesor(generic.CreateView):#CreateView hace el insert into estu..
+
+class InsertarProfesor(LoginRequiredMixin,generic.CreateView):#CreateView hace el insert into estu..
     model=Profesor
     template_name="insertar_profesor.html"
     form_class=ProfesorForm
     success_url=reverse_lazy("estudiantes:listar_profesores")#Cambiar a listar profesores
-class ListProfesores(generic.ListView):#ListView nos hace el select * from Estudiante
+    login_url="home:login"
+class ListProfesores(LoginRequiredMixin,generic.ListView):#ListView nos hace el select * from Estudiante
     model=Profesor
     template_name="listar_profesores.html"
     context_object_name="profe"
-class EditarProfesor(generic.UpdateView):#UpdateView hace el update into estu..
+    login_url="home:login"
+class EditarProfesor(LoginRequiredMixin,generic.UpdateView):#UpdateView hace el update into estu..
     model=Profesor
     template_name="insertar_profesor.html"
     form_class=ProfesorForm
     success_url=reverse_lazy("estudiantes:listar_profesores")
-class BorrarProfesor(generic.DeleteView):#Delete from Estudiante where...
+    login_url="home:login"
+class BorrarProfesor(LoginRequiredMixin,generic.DeleteView):#Delete from Estudiante where...
     model=Profesor
     template_name="borrar_profesor.html"
     context_object_name="profe"
     success_url=reverse_lazy("estudiantes:listar_profesores")
+    login_url="home:login"
 def profesor_print(self, pk=None):
     import io
     from reportlab.platypus import SimpleDocTemplate, Paragraph, TableStyle
