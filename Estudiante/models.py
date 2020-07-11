@@ -10,9 +10,16 @@ class Estudiante(models.Model):
         max_length=40,
   
     )
+    nombrepadre=models.CharField(
+        blank=True,
+        null=True,
+    )
     cedula=models.IntegerField(
 
     )
+    martriculado=models.DateField(auto_now=True)#Cada vez que cambie cambia la fecha
+    creado=models.DateField(auto_now_add=True)#Solo se cambia cuando se inserta
+    activo=models.BooleanField(default=True) 
     def __str__(self): #opcionales 
         return self.nombres + " " + self.apellidos
     def save(self): #opcional poner en todo en mayuscula, agregar cosas

@@ -3,7 +3,8 @@ from django.urls import include, path
 from Estudiante.views import ListEstudiantes, InsertarEstudiante
 from Estudiante.views import EditarEstudiante, BorrarEstudiante, InsertarProfesor
 from .views import ListProfesores,EditarProfesor, BorrarProfesor,profesor_print
-from django.contrib.auth.decorators import login_required
+from .views import EstudianteList
+from home.views import RegistroUsuario
 urlpatterns=[
     #Acá van las operaciones de los estudiantes
     path('estudiantes',ListEstudiantes.as_view(),name='listar_estudiantes'),
@@ -17,6 +18,9 @@ urlpatterns=[
     path('profesores/new',InsertarProfesor.as_view(),name='insertar_profesor'),
     path('profesores/edit/<int:pk>',EditarProfesor.as_view(),name='editar_profesor'),
     path('profesores/delete/<int:pk>',BorrarProfesor.as_view(),name='eliminar_profesor'),
-    path('profesores/print/<int:pk>',login_required(profesor_print),name='print_one'),
-     path('profesores/print',login_required(profesor_print),name='print_all'),
+    path('profesores/print/<int:pk>',(profesor_print),name='print_one'),
+    path('profesores/print',(profesor_print),name='print_all'),
+
+    path('registrar/',RegistroUsuario.as_view(),name="registrar"),
+    path('estudiantes1/',EstudianteList.as_view(),name="listajson"),
 ]

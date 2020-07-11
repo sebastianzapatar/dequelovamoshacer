@@ -15,7 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-
+from rest_framework.urlpatterns import format_suffix_patterns
+from rest_framework.routers import DefaultRouter
+from Estudiante.views import EstudianteList2
+router=DefaultRouter()
+router.register(r'estudianteslist',EstudianteList2)
+urlpatterns=router.urls
 urlpatterns = [
     path('',include(('home.urls','home'),namespace='home')),
     path('home',include(('home.urls','home'),namespace='home')),

@@ -3,7 +3,7 @@ from .models import Estudiante, Profesor
 class EstudianteForm(forms.ModelForm):#Hereda del ModelForm
     class Meta:
         model=Estudiante
-        fields=['nombres','apellidos','cedula'] #Ponemos los campos que queremos insertar
+        fields=['nombres','apellidos','cedula','activo'] #Ponemos los campos que queremos insertar
         labels={'nombres':'Ingrese su nombre','apellidos':'Ingrese sus apellidos',
         'cedula':'Ingrese su cédula'}
         widget={

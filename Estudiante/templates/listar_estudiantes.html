@@ -20,6 +20,15 @@
                     Cédula
                 </th>
                 <th>
+                    Fecha de creacion
+                </th>
+                <th>
+                    Fecha de modificacion
+                </th>
+                <th>
+                    Activo
+                </th>
+                <th>
                     Acciones <!--Editar y eliminar-->
                 </th>
             </tr>
@@ -38,6 +47,16 @@
                     </td>
                     <td>
                         {{item.cedula}}
+                    </td>
+
+                    <td>
+                        {{item.martriculado | date:'d/m/Y'}}
+                    </td>
+                    <td>
+                        {{item.creado}}
+                    </td>
+                    <td>
+                        {{item.activo|yesno:"Activo,Inactivo"}}
                     </td>
                     <td>
                         <!--Van a ser botones que nos mandan a alguna parte-->

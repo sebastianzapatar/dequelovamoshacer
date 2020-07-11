@@ -6,6 +6,10 @@ from Estudiante.models import Estudiante, Profesor
 from .forms import EstudianteForm, ProfesorForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from .serializers import EstudianteSerializado
+from rest_framework import viewsets
 # Create your views here.
 class ListEstudiantes(LoginRequiredMixin,generic.ListView):#ListView nos hace el select * from Estudiante
     model=Estudiante
@@ -57,6 +61,7 @@ class BorrarProfesor(LoginRequiredMixin,generic.DeleteView):#Delete from Estudia
     context_object_name="profe"
     success_url=reverse_lazy("estudiantes:listar_profesores")
     login_url="home:login"
+@login_required
 def profesor_print(self, pk=None):
     import io
     from reportlab.platypus import SimpleDocTemplate, Paragraph, TableStyle
@@ -100,3 +105,13 @@ def profesor_print(self, pk=None):
     response.write(buff.getvalue())
     buff.close()
     return response
+
+
+class EstudianteList(APIView):
+    def get(self,request):
+        estudiantes=Estudiante.objects.all()
+        data=EstudianteSerializado(estudiantes,many=True).data
+        return Response(data)
+class EstudianteList2(viewsets.ModelViewSet):
+    serializer_class=EstudianteSerializado
+    queryset=Estudiante.objects.all()
